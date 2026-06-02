@@ -1,0 +1,367 @@
+@import "../../styles/variables.scss";
+
+/* Top Bar */
+.top-bar {
+  background: #3d2817;
+  color: #E8D5C4;
+  padding: 8px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  border-bottom: 1px solid #2d1f0f;
+
+  .top-bar-left {
+    display: flex;
+    gap: 30px;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  .top-bar-right {
+    display: flex;
+    gap: 25px;
+
+    a {
+      color: #E8D5C4;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #C9A961;
+      }
+    }
+  }
+}
+
+/* Main Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #F5F1E8;
+  border-bottom: 1px solid #E8DED0;
+  padding: 12px 40px;
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .navbar-left {
+    .logo {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 130px;
+        height: auto;
+      }
+    }
+  }
+
+  .navbar-center {
+    flex: 1;
+    max-width: 400px;
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px 15px;
+      transition: all 0.3s;
+
+      svg {
+        color: #999;
+      }
+
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 13px;
+        color: #333;
+
+        &::placeholder {
+          color: #bbb;
+        }
+      }
+
+      &:focus-within {
+        border-color: #C9A961;
+        box-shadow: 0 0 0 2px rgba(201, 169, 97, 0.1);
+      }
+    }
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    .icon-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      position: relative;
+      cursor: pointer;
+
+      .icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #3d2817;
+        transition: all 0.3s;
+
+        &:hover {
+          color: #C9A961;
+          transform: scale(1.1);
+        }
+      }
+
+      .icon-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #3d2817;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      &.cart {
+        position: relative;
+
+        .cart-count {
+          position: absolute;
+          top: -5px;
+          right: -8px;
+          background: #C9A961;
+          color: white;
+          font-size: 10px;
+          font-weight: bold;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+.help-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: inherit;
+  font-size: inherit;
+  font-weight: 500;
+
+  &:hover {
+    color: #d4af37;
+  }
+}
+
+/* Menu Bar */
+.menu-bar {
+  background: #3d2817;
+  border-bottom: 1px solid #2d1f0f;
+  padding: 0 40px;
+
+  .menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .menu {
+    display: flex;
+    gap: 35px;
+    flex: 1;
+
+    a {
+      color: #E8D5C4;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 15px 0;
+      transition: all 0.3s;
+      position: relative;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        color: #C9A961;
+        border-bottom: 2px solid #C9A961;
+      }
+    }
+  }
+
+  .sale-btn {
+    background: #C9A961;
+    color: #3d2817;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+
+    &:hover {
+      background: #B8941A;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Mobile Responsive */
+@media(max-width: 1024px) {
+  .top-bar {
+    padding: 8px 30px;
+
+    .top-bar-left {
+      gap: 20px;
+      font-size: 11px;
+    }
+
+    .top-bar-right {
+      gap: 20px;
+    }
+  }
+
+  .navbar {
+    padding: 8px 30px;
+
+    .navbar-container {
+      gap: 20px;
+    }
+
+    .navbar-center {
+      max-width: 300px;
+    }
+
+    .navbar-left .logo .logo-text {
+      .logo-main {
+        font-size: 16px;
+      }
+
+      .logo-sub {
+        font-size: 9px;
+      }
+    }
+  }
+
+  .menu-bar {
+    padding: 0 30px;
+
+    .menu {
+      gap: 25px;
+      font-size: 13px;
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .top-bar {
+    padding: 8px 15px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+
+    .top-bar-left {
+      flex-direction: column;
+      gap: 4px;
+      font-size: 10px;
+    }
+
+    .top-bar-right {
+      gap: 15px;
+      font-size: 10px;
+    }
+  }
+
+  .navbar {
+    padding: 8px 15px;
+
+    .navbar-container {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .navbar-left .logo .logo-text {
+      .logo-main {
+        font-size: 14px;
+      }
+
+      .logo-sub {
+        font-size: 8px;
+      }
+    }
+
+    .navbar-center {
+      order: 3;
+      max-width: 100%;
+      min-width: 100%;
+
+      .search-bar {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+    }
+
+    .navbar-right {
+      gap: 15px;
+
+      .icon-label {
+        font-size: 9px;
+      }
+    }
+  }
+
+  .menu-bar {
+    padding: 0 15px;
+    flex-direction: column;
+    gap: 10px;
+
+    .menu-container {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .menu {
+      gap: 15px;
+      font-size: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      a {
+        padding: 10px 0;
+      }
+    }
+
+    .sale-btn {
+      width: 100%;
+    }
+  }
+}

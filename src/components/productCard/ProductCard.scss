@@ -1,0 +1,66 @@
+@import "../../styles/variables.scss";
+
+.product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+  &:hover {
+    transform: translateY(-8px);
+  }
+
+  .image-section {
+    height: 320px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+  }
+
+  &:hover img {
+    transform: scale(1.08);
+  }
+
+  .content {
+    padding: 15px;
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: $maroon;
+    }
+
+    .price-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 15px;
+
+      .price {
+        color: $gold;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .old-price {
+        text-decoration: line-through;
+        color: gray;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 40px;
+      background: $gold;
+      font-weight: bold;
+    }
+  }
+}
