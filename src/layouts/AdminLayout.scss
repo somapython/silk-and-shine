@@ -1,0 +1,26 @@
+.admin-layout {
+
+ display:flex;
+}
+
+.admin-content {
+
+ margin-left:260px;
+
+ width:100%;
+
+ padding:30px;
+}
+
+@media(max-width:768px){
+
+ .admin-layout{
+
+  flex-direction:column;
+ }
+
+ .admin-content{
+
+  margin-left:0;
+ }
+}

@@ -13,14 +13,3 @@ function App() {
 
 export default App
 
-
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <AppRoutes />
-//     </BrowserRouter>
-//   );
-// }
-
-// export default App;

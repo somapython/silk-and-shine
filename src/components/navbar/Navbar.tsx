@@ -1,13 +1,41 @@
 import "./Navbar.scss";
-import { Heart, User, ShoppingCart, Search } from "lucide-react";
+import { Heart, User, ShoppingCart, Search, Menu, X } from "lucide-react";
 import logo from "../../assets/logo/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HelpModal from "../helpModal/HelpModal";
 import AuthModal from "../authModal/AuthModal";
+import { getCart } from "../../services/cartService";
 
 const Navbar = () => {
     const [showHelp, setShowHelp] = useState(false);
     const [showAuth, setShowAuth] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [cartCount,setCartCount] = useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() =>
+      {
+      loadCart();
+      }, []);
+
+    const loadCart = async () => {
+        try {
+        const data =
+        await getCart();
+        setCartCount( data.length);
+      }
+        catch{}
+    };
+
+    const user = JSON.parse( localStorage.getItem("user") || "null");
+
+    const logout = () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      window.location.reload();
+    };
   return (
     <>
       {/* Top Bar */}
@@ -19,20 +47,55 @@ const Navbar = () => {
         </div>
         <div className="top-bar-right">
           <a href="/">Track Order</a>
-          {/* <a href="/">Help</a> */}
           <button
             className="help-link"
             onClick={() => setShowHelp(true)}
           >
             Help
           </button>
-          {/* <a href="/">Sign In</a> */}
+          {!user && (
           <button
             className="help-link"
             onClick={() => setShowAuth(true)}
           >
             Sign In
           </button>
+          )}
+          {user && (
+              <button
+                className="logout-btn"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            )}
+          {/* <div className="icon-group">
+            <button
+              className="icon-btn"
+              title="Account"
+              onClick={() => {
+                if (!user) {
+                  setShowAuth(true);
+                }
+              }}
+            >
+              <User size={20} />
+            </button>
+
+            <p className="icon-label">
+              {user ? user.fullName : "ACCOUNT"}
+            </p> */}
+
+            {/* {user && (
+              <button
+                className="logout-btn"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            )} */}
+           
+          {/* </div> */}
         </div>
         <HelpModal
         isOpen={showHelp}
@@ -70,31 +133,88 @@ const Navbar = () => {
 
           {/* Right - Icons */}
           <div className="navbar-right">
-            <div className="icon-group">
+            {
+              user?.role === "Admin" && (
+
+              <div className="icon-group">
+
+              <button
+              className="icon-btn"
+              onClick={() =>
+              navigate("/admin")
+              }
+              >
+              ⚙️
+              </button>
+
+              <p className="icon-label">
+              ADMIN
+              </p>
+
+              </div>
+
+              )
+              }
+            <div className="icon-group" onClick={() => navigate("/wishlist") }>
               <button className="icon-btn" title="Wishlist">
                 <Heart size={20} />
               </button>
               <p className="icon-label">WISHLIST</p>
             </div>
-            <div className="icon-group">
-              <button className="icon-btn" title="Account">
+            <div className="icon-group account-group" onClick={() =>navigate("/profile")}>
+              <button
+                className="icon-btn"
+                onClick={() => {
+                  if (!user) {
+                    setShowAuth(true);
+                  }
+                }}
+              >
                 <User size={20} />
               </button>
-              <p className="icon-label">ACCOUNT</p>
+
+              <p className="icon-label">
+                {user ? user.fullName : "ACCOUNT"}
+              </p>
+
+              {/* {user && (
+                <div className="user-dropdown">
+                  <button className="user-name">
+                    My Account
+                  </button>
+
+                  <div className="dropdown-menu">
+                    <button onClick={() => navigate("/profile")}>Profile</button>
+                    <button onClick={() => navigate("/wishlist") }>Wishlist</button>
+                    <button>Orders</button>
+                    <button onClick={logout}>
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              )} */}
             </div>
-            <div className="icon-group cart">
+            <div className="icon-group cart" onClick={() => navigate("/cart")}>
               <button className="icon-btn" title="Cart">
-                <ShoppingCart size={20} />
+                <ShoppingCart  size={20} />
               </button>
               <p className="icon-label">CART</p>
-              <span className="cart-count">0</span>
+              <span className="cart-count"> {cartCount} </span>
             </div>
+
+            {/* Hamburger Menu */}
+            <button 
+              className="hamburger-btn"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </nav>
 
       {/* Menu Bar */}
-      <div className="menu-bar">
+      <div className={`menu-bar ${mobileMenuOpen ? 'active' : ''}`}>
         <div className="menu-container">
           <div className="menu">
             <a href="/">All Sarees</a>

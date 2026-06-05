@@ -163,7 +163,94 @@
         }
       }
     }
+
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #3d2817;
+      padding: 5px;
+      transition: all 0.3s;
+
+      &:hover {
+        color: #C9A961;
+      }
+    }
   }
+}
+
+.logout-btn {
+  border: none;
+  background: #8b1e3f;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 4px;
+  font-size: 12px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.account-group {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+}
+
+.user-name {
+  display: none;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+
+  right: 0;
+  top: 10px;
+
+  width: 220px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.15);
+
+  overflow: hidden;
+}
+
+.account-group:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  padding: 14px 16px;
+
+  border: none;
+
+  background: white;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  font-size: 14px;
+}
+
+.dropdown-menu button:hover {
+  background: #f8f8f8;
 }
 
 .help-link {
@@ -284,84 +371,152 @@
 
 @media(max-width: 768px) {
   .top-bar {
-    padding: 8px 15px;
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-
-    .top-bar-left {
-      flex-direction: column;
-      gap: 4px;
-      font-size: 10px;
-    }
-
-    .top-bar-right {
-      gap: 15px;
-      font-size: 10px;
-    }
+    display: none;
   }
 
   .navbar {
-    padding: 8px 15px;
+    padding: 10px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
 
     .navbar-container {
-      flex-wrap: wrap;
       gap: 10px;
     }
 
-    .navbar-left .logo .logo-text {
-      .logo-main {
-        font-size: 14px;
-      }
+    .navbar-left {
+      flex-shrink: 0;
 
-      .logo-sub {
-        font-size: 8px;
+      .logo img {
+        width: 100px;
+        height: auto;
       }
     }
 
     .navbar-center {
-      order: 3;
-      max-width: 100%;
-      min-width: 100%;
-
-      .search-bar {
-        padding: 6px 10px;
-        font-size: 12px;
-      }
+      display: none;
     }
 
     .navbar-right {
-      gap: 15px;
+      margin-left: auto;
+      gap: 10px;
 
-      .icon-label {
-        font-size: 9px;
+      .icon-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+
+        .icon-btn {
+          padding: 0;
+        }
+
+        .icon-label {
+          display: none;
+        }
+
+        &.cart {
+          .cart-count {
+            top: -5px;
+            right: -8px;
+          }
+        }
+      }
+
+      .hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
 
   .menu-bar {
-    padding: 0 15px;
-    flex-direction: column;
-    gap: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    padding: 0;
+    background: #3d2817;
+
+    &.active {
+      max-height: 400px;
+      overflow-y: auto;
+    }
 
     .menu-container {
       flex-direction: column;
-      width: 100%;
+      padding: 15px;
+      gap: 0;
     }
 
     .menu {
-      gap: 15px;
-      font-size: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
 
       a {
-        padding: 10px 0;
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(232, 213, 196, 0.1);
+        font-size: 14px;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:hover {
+          border-bottom: 1px solid #C9A961;
+        }
       }
     }
 
     .sale-btn {
       width: 100%;
+      margin-top: 10px;
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  .navbar {
+    padding: 8px 10px;
+
+    .navbar-left .logo img {
+      width: 80px;
+    }
+
+    .navbar-right {
+      .icon-group {
+        .icon-btn svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      .hamburger-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .menu-bar {
+    &.active {
+      max-height: 350px;
+    }
+
+    .menu-container {
+      padding: 12px;
+    }
+
+    .menu a {
+      padding: 10px 0;
+      font-size: 13px;
+    }
+
+    .sale-btn {
+      padding: 8px 15px;
+      font-size: 12px;
     }
   }
 }

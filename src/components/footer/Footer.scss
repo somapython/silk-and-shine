@@ -245,71 +245,90 @@
 }
 
 @media(max-width: 768px) {
+  .footer {
+    margin-top: 40px;
+  }
+
   .footer-container {
-    padding: 30px 20px;
+    padding: 30px 15px;
   }
 
   .footer-wrapper {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 25px;
 
     .footer-brand {
       grid-column: auto;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(201, 169, 97, 0.1);
     }
   }
 
   .footer-section {
     h4 {
-      font-size: 13px;
-      margin-bottom: 15px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
     }
 
-    ul li {
-      margin-bottom: 10px;
+    ul {
+      li {
+        margin-bottom: 8px;
 
-      a {
-        font-size: 13px;
+        a {
+          font-size: 12px;
+        }
       }
     }
   }
 
   .footer-brand {
-    .logo-text {
-      .logo-main {
-        font-size: 18px;
-      }
+    .footer-logo {
+      margin-bottom: 15px;
 
-      .logo-sub {
-        font-size: 10px;
+      .logo-text {
+        .logo-main {
+          font-size: 18px;
+        }
+
+        .logo-sub {
+          font-size: 9px;
+        }
       }
     }
 
     .brand-description {
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 15px;
     }
 
     .social-icons {
       gap: 12px;
 
       a {
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
       }
     }
   }
 
   .footer-contact {
     .contact-item {
-      font-size: 13px;
+      font-size: 12px;
+      gap: 10px;
+      margin-bottom: 12px;
 
-      .contact-icon {
-        font-size: 14px;
+      svg {
+        width: 16px;
+        height: 16px;
       }
     }
 
     .contact-hours {
-      font-size: 11px;
+      font-size: 10px;
+      margin-top: 10px;
     }
   }
 
@@ -319,7 +338,7 @@
 
   .footer-bottom-container {
     flex-direction: column;
-    padding: 0 20px;
+    padding: 0 15px;
     gap: 10px;
 
     & > div {
@@ -329,25 +348,129 @@
   }
 
   .footer-bottom-left p {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .footer-bottom-center {
     gap: 8px;
+    justify-content: center;
 
     a {
-      font-size: 11px;
+      font-size: 10px;
+    }
+
+    .divider {
+      font-size: 10px;
     }
   }
 
   .footer-bottom-right {
+    width: 100%;
+
     .payment-methods {
       justify-content: center;
-      gap: 8px;
-      font-size: 10px;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 9px;
 
-      span {
-        padding: 3px 6px;
+      .payment-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        border: 1px solid rgba(201, 169, 97, 0.2);
+        border-radius: 3px;
+        background: rgba(201, 169, 97, 0.05);
+        color: #A08968;
+
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        span {
+          font-size: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  .footer-container {
+    padding: 20px 12px;
+  }
+
+  .footer-wrapper {
+    gap: 15px;
+
+    .footer-brand {
+      padding-bottom: 15px;
+    }
+  }
+
+  .footer-section {
+    h4 {
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+
+      a {
+        font-size: 11px;
+      }
+    }
+  }
+
+  .footer-brand {
+    .logo-text .logo-main {
+      font-size: 16px;
+    }
+
+    .brand-description {
+      font-size: 11px;
+    }
+
+    .social-icons {
+      gap: 10px;
+
+      a {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  .footer-contact .contact-item {
+    font-size: 11px;
+  }
+
+  .footer-bottom {
+    padding: 12px 0;
+  }
+
+  .footer-bottom-container {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .footer-bottom-left p,
+  .footer-bottom-center a {
+    font-size: 9px;
+  }
+
+  .footer-bottom-right .payment-methods {
+    gap: 4px;
+    font-size: 8px;
+
+    .payment-item {
+      padding: 3px 6px;
+
+      svg {
+        width: 10px;
+        height: 10px;
       }
     }
   }

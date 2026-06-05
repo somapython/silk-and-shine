@@ -1,6 +1,10 @@
 import "./ProductCard.scss";
+import { useNavigate } from "react-router-dom";
+
+
 
 type Props = {
+  id: number;
   image: string;
   title: string;
   price: number;
@@ -8,13 +12,17 @@ type Props = {
 };
 
 const ProductCard = ({
+  id,
   image,
   title,
   price,
   oldPrice
 }: Props) => {
+  const navigate = useNavigate();
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() =>
+    navigate(`/product/${id}`)
+  }>
 
       <div className="image-section">
         <img src={image} alt={title} />

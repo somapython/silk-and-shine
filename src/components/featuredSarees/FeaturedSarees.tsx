@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getProducts } from "../../services/productService";
+import {
+ addToCart
+}
+from "../../services/cartService";
 import "./FeaturedSarees.scss";
 import saree1 from "../../assets/images/saree1.jpg";
 import saree2 from "../../assets/images/saree2.jpg";
@@ -8,74 +13,99 @@ import saree5 from "../../assets/images/saree5.jpg";
 import saree6 from "../../assets/images/saree6.jpg";
 
 const FeaturedSarees = () => {
-  const [products] = useState([
-    {
-      id: 1,
-      name: "Kanjivaram Pure Silk",
-      origin: "Kanchipuram, Tamil Nadu",
-      price: 8499,
-      originalPrice: 11000,
-      type: "SILK",
-      bgColor: "#FEF5EE",
-      textColor: "#C9A961",
-      image: saree1,
-    },
-    {
-      id: 2,
-      name: "Banarasi Zari Weave",
-      origin: "Varanasi, Uttar Pradesh",
-      price: 6200,
-      originalPrice: 8500,
-      type: "BANARASI",
-      bgColor: "#F0E8F5",
-      textColor: "#9D7BC4",
-      image: saree2,
-    },
-    {
-      id: 3,
-      name: "Chanderi Silk Cotton",
-      origin: "Chanderi, Madhya Pradesh",
-      price: 3800,
-      originalPrice: null,
-      type: "CHANDERI",
-      bgColor: "#EEF7F0",
-      textColor: "#7DB896",
-      image: saree3,
-    },
-    {
-      id: 4,
-      name: "Maheshwari Cotton Silk",
-      origin: "Madhya Pradesh",
-      price: 4500,
-      originalPrice: 6000,
-      type: "SILK",
-      bgColor: "#FEF5EE",
-      textColor: "#C9A961",
-      image: saree4,
-    },
-    {
-      id: 5,
-      name: "Tissue Saree Gold",
-      origin: "Tamil Nadu",
-      price: 5200,
-      originalPrice: 7500,
-      type: "BANARASI",
-      bgColor: "#F0E8F5",
-      textColor: "#9D7BC4",
-      image: saree5,
-    },
-    {
-      id: 6,
-      name: "Paithani Pure Silk",
-      origin: "Maharashtra",
-      price: 9800,
-      originalPrice: 13000,
-      type: "CHANDERI",
-      bgColor: "#EEF7F0",
-      textColor: "#7DB896",
-      image: saree6,
-    },
-  ]);
+   const [products, setProducts] =
+    useState<any[]>([]);
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+
+    try {
+
+      const data =
+        await getProducts();
+
+      console.log("Products:", data);
+
+      setProducts(data);
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+  };
+
+  // const [products] = useState([
+  //   {
+  //     id: 1,
+  //     name: "Kanjivaram Pure Silk",
+  //     origin: "Kanchipuram, Tamil Nadu",
+  //     price: 8499,
+  //     originalPrice: 11000,
+  //     type: "SILK",
+  //     bgColor: "#FEF5EE",
+  //     textColor: "#C9A961",
+  //     image: saree1,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Banarasi Zari Weave",
+  //     origin: "Varanasi, Uttar Pradesh",
+  //     price: 6200,
+  //     originalPrice: 8500,
+  //     type: "BANARASI",
+  //     bgColor: "#F0E8F5",
+  //     textColor: "#9D7BC4",
+  //     image: saree2,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Chanderi Silk Cotton",
+  //     origin: "Chanderi, Madhya Pradesh",
+  //     price: 3800,
+  //     originalPrice: null,
+  //     type: "CHANDERI",
+  //     bgColor: "#EEF7F0",
+  //     textColor: "#7DB896",
+  //     image: saree3,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Maheshwari Cotton Silk",
+  //     origin: "Madhya Pradesh",
+  //     price: 4500,
+  //     originalPrice: 6000,
+  //     type: "SILK",
+  //     bgColor: "#FEF5EE",
+  //     textColor: "#C9A961",
+  //     image: saree4,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Tissue Saree Gold",
+  //     origin: "Tamil Nadu",
+  //     price: 5200,
+  //     originalPrice: 7500,
+  //     type: "BANARASI",
+  //     bgColor: "#F0E8F5",
+  //     textColor: "#9D7BC4",
+  //     image: saree5,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Paithani Pure Silk",
+  //     origin: "Maharashtra",
+  //     price: 9800,
+  //     originalPrice: 13000,
+  //     type: "CHANDERI",
+  //     bgColor: "#EEF7F0",
+  //     textColor: "#7DB896",
+  //     image: saree6,
+  //   },
+  // ]);
 
   return (
     <div className="featured-sarees">
@@ -105,7 +135,10 @@ const FeaturedSarees = () => {
                       <span className="original-price">₹{product.originalPrice.toLocaleString()}</span>
                     )}
                   </div>
-                  <button className="add-btn">Add To Cart</button>
+                  <button className="add-btn" onClick={ async () => { await addToCart( product.id );
+                    alert( "Added To Cart");}}>
+                      Add To Cart
+                  </button>
                 </div>
               </div>
             </div>

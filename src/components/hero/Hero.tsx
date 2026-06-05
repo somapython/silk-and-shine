@@ -11,7 +11,7 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          <p className="hero-subtitle">NEW COLLECTION 2026</p>
+          <p className="hero-subtitle">NEW COLLECTION {new Date().getFullYear()}</p>
           
           <h1>
             Timeless <span className="highlight">Silk</span> & <br />
