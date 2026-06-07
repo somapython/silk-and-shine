@@ -1,6 +1,151 @@
+.orders-page {
+  padding: 25px;
+}
+
+.orders-header {
+
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #777;
+  }
+}
+
+.orders-grid {
+
+  display: grid;
+
+  grid-template-columns:
+  repeat(auto-fill,minmax(320px,1fr));
+
+  gap: 20px;
+}
+
 .order-card {
+
   background: white;
+
+  border-radius: 20px;
+
   padding: 20px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+  transition: .3s;
+
+  &:hover {
+
+    transform:
+    translateY(-5px);
+  }
+}
+
+.order-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
   margin-bottom: 15px;
+}
+
+.status {
+
+  padding: 8px 15px;
+
+  border-radius: 50px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.pending {
+
+  background: #fff2e0;
+
+  color: #ff9800;
+}
+
+.packed {
+
+  background: #e3f2fd;
+
+  color: #1976d2;
+}
+
+.shipped {
+
+  background: #ede7f6;
+
+  color: #673ab7;
+}
+
+.delivered {
+
+  background: #e8f5e9;
+
+  color: #2e7d32;
+}
+
+.order-body {
+
+  margin-bottom: 20px;
+
+  p {
+
+    margin-bottom: 8px;
+  }
+}
+
+select {
+
+  width: 100%;
+
+  padding: 12px;
+
   border-radius: 10px;
+
+  border: 1px solid #ddd;
+}
+
+.stats-row {
+
+  display: grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
+  gap: 20px;
+
+  margin-bottom: 30px;
+}
+
+.stat-card {
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+  h2 {
+
+    color: #b8860b;
+
+    font-size: 2rem;
+  }
 }

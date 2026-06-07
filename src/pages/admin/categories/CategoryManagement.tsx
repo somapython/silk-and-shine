@@ -1,6 +1,7 @@
 import "./CategoryManagement.scss";
 import { useEffect,useState } from "react";
 import api from "../../../services/api";
+import AdminLayout from "../../../layouts/AdminLayout";
 
 const CategoriesManagement = () => {
 
@@ -25,6 +26,7 @@ const CategoriesManagement = () => {
   };
 
   return (
+    <AdminLayout>
     <div className="admin-page">
 
       <h1>
@@ -45,6 +47,7 @@ const CategoriesManagement = () => {
       }
 
     </div>
+    </AdminLayout>
   );
 };
 
