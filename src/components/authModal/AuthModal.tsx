@@ -64,7 +64,7 @@ const AuthModal = ({
         );
 
       alert(
-        `Welcome ${response.fullName}`
+        `Welcome ${response.user.fullName}`
       );
 
       onClose();

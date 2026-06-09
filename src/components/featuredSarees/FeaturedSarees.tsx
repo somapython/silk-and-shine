@@ -4,17 +4,23 @@ import {
  addToCart
 }
 from "../../services/cartService";
-import "./FeaturedSarees.scss";
+import { Link } from "react-router-dom";
+
+import { addToWishlist } from "../../services/wishlistService";
+
+import {
+  Heart,
+  ShoppingBag,
+  Eye,
+  Star
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import saree1 from "../../assets/images/saree1.jpg";
-import saree2 from "../../assets/images/saree2.jpg";
-import saree3 from "../../assets/images/saree3.jpg";
-import saree4 from "../../assets/images/saree4.jpg";
-import saree5 from "../../assets/images/saree5.jpg";
-import saree6 from "../../assets/images/saree6.jpg";
+import "./FeaturedSarees.scss";
 
 const FeaturedSarees = () => {
-   const [products, setProducts] =
-    useState<any[]>([]);
+   const [products, setProducts] = useState<any[]>([]);
+   const navigate = useNavigate();
 
   useEffect(() => {
     loadProducts();
@@ -37,6 +43,21 @@ const FeaturedSarees = () => {
 
     }
   };
+
+    const handleWishlist = async(id:number) => {
+
+      try {
+
+        await addToWishlist(id);
+
+        alert("Added To Wishlist");
+
+      } catch {
+
+        alert("Please Login First");
+
+      }
+    };
 
   // const [products] = useState([
   //   {
@@ -112,33 +133,115 @@ const FeaturedSarees = () => {
       <div className="featured-container">
         <div className="section-header">
           <h2>Trending Collection</h2>
-          <a href="/" className="see-all">
-            See all →
-          </a>
+          <Link to="/products" className="see-all"> See All → </Link>
         </div>
 
         <div className="products-grid">
           {products.map((product) => (
             <div key={product.id} className="product-card">
               <div className="product-image">
-                <img src={product.image} alt={product.name} className="saree-image" />
+                <span className="discount-badge">
+                    {Math.round(
+                      (
+                        (product.price * 1.2 - product.price)
+                        /
+                        (product.price * 1.2)
+                      ) * 100
+                      )}% OFF
+                  </span>
+
+                  <button
+                    className="wishlist-btn"
+                    onClick={() => handleWishlist(product.id)}
+                  >
+                    <Heart size={18}/>
+                  </button>
+
+                  <img
+                    src={
+                      product.imageUrl ||
+                      saree1
+                    }
+                    alt={product.name}
+                    className="saree-image"
+                  />
+
+                  <div className="hover-actions">
+
+                    <button
+                      onClick={() =>
+                      navigate(
+                        `/product/${product.id}`
+                      )}
+                    >
+                      <Eye size={16}/>
+                      View
+                    </button>
+
+                  </div>
               </div>
 
               <div className="product-info">
+                <div className="rating">
+
+                  <Star
+                  size={14}
+                  fill="currentColor"
+                  />
+
+                  <span>
+                    {product.rating || 4.8}
+                  </span>
+
+                </div>
                 <h3 className="product-name">{product.name}</h3>
-                <p className="product-origin">{product.origin}</p>
+                <p className="product-origin">{product.category}</p>
 
                 <div className="product-footer">
                   <div className="price-section">
-                    <span className="current-price">₹{product.price.toLocaleString()}</span>
-                    {product.originalPrice && (
-                      <span className="original-price">₹{product.originalPrice.toLocaleString()}</span>
-                    )}
+
+                    <span className="current-price">
+                      ₹{product.price}
+                    </span>
+
+                    <span className="original-price">
+                      ₹{Math.round(
+                        product.price * 1.2
+                      )}
+                    </span>
+
                   </div>
-                  <button className="add-btn" onClick={ async () => { await addToCart( product.id );
-                    alert( "Added To Cart");}}>
+                  <div className="card-buttons">
+
+                    <button
+                      className="view-btn"
+                      onClick={() =>
+                      navigate(
+                        `/product/${product.id}`
+                      )}
+                    >
+                      View Product
+                    </button>
+
+                    <button
+                      className="add-btn"
+                      onClick={async()=>{
+
+                        await addToCart(
+                          product.id
+                        );
+
+                        alert(
+                          "Added To Cart"
+                        );
+
+                      }}
+                    >
+                      <ShoppingBag size={16}/>
                       Add To Cart
-                  </button>
+                    </button>
+
+                  </div>
                 </div>
               </div>
             </div>

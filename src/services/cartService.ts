@@ -5,9 +5,15 @@ async (
  productId:number
 ) =>
 {
- return await api.post(
-  `/Cart?productId=${productId}`
- );
+ const response =
+    await api.post(
+      "/Cart",
+      {
+        productId
+      }
+    );
+
+  return response.data;
 };
 
 export const getCart =

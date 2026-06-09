@@ -14,3 +14,18 @@ export const removeWishlist = async (
     `/Wishlist/${id}`
   );
 };
+
+export const addToWishlist = async (
+  productId: number
+) => {
+
+  const response =
+    await api.post(
+      "/Wishlist",
+      {
+        productId
+      }
+    );
+
+  return response.data;
+};
